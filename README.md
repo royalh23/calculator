@@ -1,0 +1,1 @@
+This is a Calculator project. This project is a demonstration of my front-end skills.
