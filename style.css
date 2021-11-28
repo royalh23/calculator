@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+}
+
+.calc {
+  border: 5px solid black;
+  border-radius: 25px;
+  height: 660px;
+  width: 500px;
+}
