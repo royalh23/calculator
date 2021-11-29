@@ -19,6 +19,7 @@ body {
   height: 660px;
   width: 500px;
   padding: 5px 0 5px 0;
+  gap: 4px;
 }
 
 .calc>div {
@@ -37,9 +38,26 @@ body {
   display: flex;
   flex-wrap: wrap;
   height: 470px;
+  flex: auto;
+  gap: 12px;
+  padding: 5px 0 0 5px;
 }
 
 .buttons>button {
   font-size: 30px;
-  height: 89px;
+  height: 75px;
+  width: 107px;
+  border-radius: 50%;
+}
+
+.bigger {
+  width: 346px !important;
+}
+
+.zero {
+  width: 225px !important;
+}
+
+.bigger, .zero {
+  border-radius: 45px !important;
 }
