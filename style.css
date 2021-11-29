@@ -28,8 +28,8 @@ body {
 
 .display {
   height: 130px;
-  font-size: 40px;
-  padding: 80px 0 0 291px;
+  font-size: 60px;
+  padding: 60px 0 0 440px;
 }
 
 .buttons {
@@ -57,11 +57,11 @@ body {
   color: white;
 }
 
-.zero {
+#zero {
   width: 225px !important;
 }
 
-.clear, .zero {
+.clear, #zero {
   border-radius: 50px !important;
 }
 
