@@ -30,13 +30,25 @@ function operate(operator, a, b) {
 function displayValue(e) {
   if (display.textContent === "0") {
     display.textContent = e.target.textContent;
-    firstDisplayValue = display.textContent;
   } else if (display.textContent !== "0") {
       display.textContent += e.target.textContent;
       let paddingLeftValue = parseInt(window.getComputedStyle(display)
                                         .getPropertyValue("padding-left")) - 30;
       display.style.paddingLeft = `${paddingLeftValue}px`;
-      firstDisplayValue = display.textContent;
+  }
+}
+
+function calculate(e) {
+  firstDisplayValue = display.textContent;
+  let operator;
+  if (e.target.getAttribute("id") === "divide") {
+    operator = "/";
+  } else if (e.target.getAttribute("id") === "multiply") {
+      operator = "*";
+  } else if (e.target.getAttribute("id") === "subtract") {
+      operator = "-";
+  } else if (e.target.getAttribute("id") === "add") {
+      operator = "+";
   }
 }
 
@@ -49,3 +61,7 @@ const display = document.querySelector(".display");
 const buttons = document.querySelectorAll("#one, #two, #three, #four, #five," + 
                                 " #six, #seven, #eight, #nine, #zero, #comma");
 buttons.forEach(button => button.addEventListener("click", displayValue));
+
+// Add event listeners to the operators
+const operators = document.querySelectorAll(".operator");
+operators.forEach(operator => operator.addEventListener("click", calculate));
