@@ -39,6 +39,7 @@ function displayValue(e) {
 }
 
 function calculate(e) {
+  operatorClicked = true;
   firstDisplayValue = display.textContent;
   let operator;
   if (e.target.getAttribute("id") === "divide") {
@@ -53,6 +54,9 @@ function calculate(e) {
 }
 
 let firstDisplayValue;
+
+// Use a variable to check if an operator button has been clicked before
+let operatorClicked = false;
 
 // Create the display variable
 const display = document.querySelector(".display");
