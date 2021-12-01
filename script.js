@@ -39,9 +39,15 @@ function displayValue(e) {
 }
 
 function calculate(e) {
-  firstDisplayValue = display.textContent;
+  if (firstDisplayValue) {
+    secondDisplayValue = display.textContent;
+    console.log(`second value: ${secondDisplayValue}`);
+  } else {
+      firstDisplayValue = display.textContent;
+      console.log(`first value: ${firstDisplayValue}`);
+  }
   display.textContent = "";
-  display.style.paddingLeft = "440px";
+  display.style.paddingLeft = "470px";
   let operator;
   if (e.target.getAttribute("id") === "divide") {
     operator = "/";
