@@ -67,6 +67,9 @@ function calculate() {
   getValue();
   let solution = operate(operator, firstDisplayValue, secondDisplayValue);
   display.textContent = solution;
+  let solutionLength = solution.toString().length;
+  let paddingLeftValue = 440 - (solutionLength - 1) * 30;
+  display.style.paddingLeft = `${paddingLeftValue}px`;
 }
 
 // Declare the main variables
