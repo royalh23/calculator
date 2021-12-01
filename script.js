@@ -28,6 +28,7 @@ function operate(operator, a, b) {
 }
 
 function displayValue(e) {
+  operators.forEach(operator => operator.classList.remove("active"));
   if (display.textContent === "0") {
     display.textContent = e.target.textContent;
   } else if (display.textContent !== "0") {
@@ -49,9 +50,9 @@ function getValue() {
 }
 
 function getValueAndOp(e) {
+  operators.forEach(operator => operator.classList.remove("active"));
+  e.target.classList.add("active");
   getValue();
-  display.textContent = "";
-  display.style.paddingLeft = "470px";
   if (e.target.getAttribute("id") === "divide") {
     operator = "/";
   } else if (e.target.getAttribute("id") === "multiply") {
@@ -64,6 +65,7 @@ function getValueAndOp(e) {
 }
 
 function calculate() {
+  operators.forEach(operator => operator.classList.remove("active"));
   getValue();
   let solution = operate(operator, firstDisplayValue, secondDisplayValue);
   display.textContent = solution;
@@ -82,7 +84,7 @@ const display = document.querySelector(".display");
 
 // Add event listeners to the digits
 const buttons = document.querySelectorAll("#one, #two, #three, #four, #five," + 
-                                " #six, #seven, #eight, #nine, #zero, #comma");
+                                " #six, #seven, #eight, #nine, #zero, #dot");
 buttons.forEach(button => button.addEventListener("click", displayValue));
 
 // Add event listeners to the operators
