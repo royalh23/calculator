@@ -28,6 +28,11 @@ function operate(operator, a, b) {
 }
 
 function displayValue(e) {
+  if (clearDisplay) {
+    display.textContent = "";
+    display.style.paddingLeft = "470px";
+  }
+  clearDisplay = false;
   operators.forEach(operator => operator.classList.remove("active"));
   if (display.textContent === "0") {
     display.textContent = e.target.textContent;
@@ -50,6 +55,7 @@ function getValue() {
 }
 
 function getValueAndOp(e) {
+  clearDisplay = true;
   operators.forEach(operator => operator.classList.remove("active"));
   e.target.classList.add("active");
   getValue();
@@ -78,6 +84,7 @@ function calculate() {
 let firstDisplayValue;
 let secondDisplayValue;
 let operator;
+let clearDisplay = false;
 
 // Create the display variable
 const display = document.querySelector(".display");
