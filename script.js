@@ -59,6 +59,18 @@ function getValueAndOp(e) {
   operators.forEach(operator => operator.classList.remove("active"));
   e.target.classList.add("active");
   getValue();
+  if (firstDisplayValue && secondDisplayValue) {
+    solution = operate(operator, firstDisplayValue, secondDisplayValue);
+    display.textContent = solution;
+    firstDisplayValue = null;
+    console.log("firstDisplayValue = null");
+    secondDisplayValue = null;
+    console.log("secondDisplayValue = null");
+    let solutionLength = solution.toString().length;
+    let paddingLeftValue = 440 - (solutionLength - 1) * 30;
+    display.style.paddingLeft = `${paddingLeftValue}px`;
+    getValue();
+  }
   if (e.target.getAttribute("id") === "divide") {
     operator = "/";
   } else if (e.target.getAttribute("id") === "multiply") {
@@ -71,19 +83,25 @@ function getValueAndOp(e) {
 }
 
 function calculate() {
+  clearDisplay = true;
   operators.forEach(operator => operator.classList.remove("active"));
   getValue();
-  let solution = operate(operator, firstDisplayValue, secondDisplayValue);
+  solution = operate(operator, firstDisplayValue, secondDisplayValue);
   display.textContent = solution;
+  firstDisplayValue = null;
+  console.log("firstDisplayValue = null");
+  secondDisplayValue = null;
+  console.log("secondDisplayValue = null");
   let solutionLength = solution.toString().length;
   let paddingLeftValue = 440 - (solutionLength - 1) * 30;
   display.style.paddingLeft = `${paddingLeftValue}px`;
 }
 
 // Declare the main variables
-let firstDisplayValue;
-let secondDisplayValue;
-let operator;
+let firstDisplayValue = null;
+let secondDisplayValue = null;
+let solution = null;
+let operator = null;
 let clearDisplay = false;
 
 // Create the display variable
