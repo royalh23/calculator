@@ -1,18 +1,18 @@
 // Basic math operations
 function add(a, b) {
-  return parseInt(a) + parseInt(b);
+  return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
-  return parseInt(a) - parseInt(b);
+  return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
-  return parseInt(a) * parseInt(b);
+  return Number(a) * Number(b);
 }
 
 function divide(a, b) {
-  return parseInt(a) / parseInt(b);
+  return Number(a) / Number(b);
 }
 
 function operate(operator, a, b) {
@@ -89,7 +89,7 @@ function displaySolution() {
 function calculate() {
   solution = operate(operator, firstDisplayValue, secondDisplayValue);
   if (!Number.isInteger(solution)) {
-    solution = solution.toFixed(10);
+    solution = solution.toFixed(1);
   }
   display.textContent = solution;
   firstDisplayValue = null;
