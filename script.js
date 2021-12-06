@@ -38,10 +38,17 @@ function displayValue(e) {
     display.textContent = e.target.textContent;
   } else if (display.textContent !== "0") {
       display.textContent += e.target.textContent;
-      let paddingLeftValue = parseInt(window.getComputedStyle(display)
+      paddingLeftValue = parseInt(window.getComputedStyle(display)
                                         .getPropertyValue("padding-left")) - 30;
       display.style.paddingLeft = `${paddingLeftValue}px`;
   }
+}
+
+function displayPoint(e) {
+  display.textContent += e.target.textContent;
+  paddingLeftValue = parseInt(window.getComputedStyle(display)
+                                        .getPropertyValue("padding-left")) - 17;
+  display.style.paddingLeft = `${paddingLeftValue}px`;
 }
 
 function getValue() {
@@ -93,6 +100,7 @@ function calculate() {
 }
 
 // Declare the main variables
+let paddingLeftValue = null;
 let firstDisplayValue = null;
 let secondDisplayValue = null;
 let solution = null;
@@ -104,8 +112,12 @@ const display = document.querySelector(".display");
 
 // Add event listeners to the digits
 const buttons = document.querySelectorAll("#one, #two, #three, #four, #five," + 
-                                " #six, #seven, #eight, #nine, #zero, #dot");
+                                " #six, #seven, #eight, #nine, #zero");
 buttons.forEach(button => button.addEventListener("click", displayValue));
+
+// Add an event listener to the point
+const point = document.querySelector("#point");
+point.addEventListener("click", displayPoint);
 
 // Add event listeners to the operators
 const operators = document.querySelectorAll(".operator");
