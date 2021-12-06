@@ -47,10 +47,8 @@ function displayValue(e) {
 function getValue() {
   if (firstDisplayValue) {
     secondDisplayValue = display.textContent;
-    console.log(`second value: ${secondDisplayValue}`);
   } else {
       firstDisplayValue = display.textContent;
-      console.log(`first value: ${firstDisplayValue}`);
   }
 }
 
@@ -60,15 +58,7 @@ function getValueAndOp(e) {
   e.target.classList.add("active");
   getValue();
   if (firstDisplayValue && secondDisplayValue) {
-    solution = operate(operator, firstDisplayValue, secondDisplayValue);
-    display.textContent = solution;
-    firstDisplayValue = null;
-    console.log("firstDisplayValue = null");
-    secondDisplayValue = null;
-    console.log("secondDisplayValue = null");
-    let solutionLength = solution.toString().length;
-    let paddingLeftValue = 440 - (solutionLength - 1) * 30;
-    display.style.paddingLeft = `${paddingLeftValue}px`;
+    calculate();
     getValue();
   }
   if (e.target.getAttribute("id") === "divide") {
@@ -82,16 +72,21 @@ function getValueAndOp(e) {
   }
 }
 
-function calculate() {
+function displaySolution() {
   clearDisplay = true;
   operators.forEach(operator => operator.classList.remove("active"));
   getValue();
+  calculate();
+}
+
+function calculate() {
   solution = operate(operator, firstDisplayValue, secondDisplayValue);
+  if (!Number.isInteger(solution)) {
+    solution = solution.toFixed(10);
+  }
   display.textContent = solution;
   firstDisplayValue = null;
-  console.log("firstDisplayValue = null");
   secondDisplayValue = null;
-  console.log("secondDisplayValue = null");
   let solutionLength = solution.toString().length;
   let paddingLeftValue = 440 - (solutionLength - 1) * 30;
   display.style.paddingLeft = `${paddingLeftValue}px`;
@@ -118,4 +113,4 @@ operators.forEach(operator => operator.addEventListener("click", getValueAndOp))
 
 // Add an event listener to =
 const equal = document.querySelector("#equal");
-equal.addEventListener("click", calculate);
+equal.addEventListener("click", displaySolution);
