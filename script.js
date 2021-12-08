@@ -88,14 +88,21 @@ function displaySolution() {
 
 function calculate() {
   solution = operate(operator, firstDisplayValue, secondDisplayValue);
+  let solutionLength = solution.toString().length;
   if (!Number.isInteger(solution)) {
-    solution = solution.toFixed(1);
+    if (solutionLength > 16) {
+      solution = solution.toFixed(12);
+      solutionLength = solution.toString().length;
+      paddingLeftValue = 440 - (solutionLength - 1) * 29;
+    } else {
+        paddingLeftValue = 440 - (solutionLength - 1) * 25;
+    }
+  } else {
+      paddingLeftValue = 440 - (solutionLength - 1) * 30;
   }
   display.textContent = solution;
   firstDisplayValue = null;
-  secondDisplayValue = null;
-  let solutionLength = solution.toString().length;
-  let paddingLeftValue = 440 - (solutionLength - 1) * 30;
+  secondDisplayValue = null
   display.style.paddingLeft = `${paddingLeftValue}px`;
 }
 
