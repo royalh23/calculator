@@ -91,14 +91,17 @@ function calculate() {
   let solutionLength = solution.toString().length;
   if (!Number.isInteger(solution)) {
     if (solutionLength > 16) {
-      solution = solution.toFixed(12);
+      let text = solution.toString();
+      let afterDcml = text.length - text.indexOf(".") - 1;
+      let beforeDcml = text.length - afterDcml - 1;
+      solution = solution.toFixed(15 - beforeDcml);
       solutionLength = solution.toString().length;
-      paddingLeftValue = 440 - (solutionLength - 1) * 29;
-    } else {
-        paddingLeftValue = 440 - (solutionLength - 1) * 25;
-    }
+    } 
+    paddingLeftValue = 423 - (solutionLength - 2) * 30;
   } else {
       paddingLeftValue = 440 - (solutionLength - 1) * 30;
+      console.log(solution);
+      console.log("integer");
   }
   display.textContent = solution;
   firstDisplayValue = null;
