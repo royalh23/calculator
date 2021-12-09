@@ -33,22 +33,32 @@ function displayValue(e) {
     display.style.paddingLeft = "470px";
   }
   clearDisplay = false;
-  operators.forEach(operator => operator.classList.remove("active"));
-  if (display.textContent === "0") {
-    display.textContent = e.target.textContent;
-  } else if (display.textContent !== "0") {
-      display.textContent += e.target.textContent;
-      paddingLeftValue = parseInt(window.getComputedStyle(display)
-                                        .getPropertyValue("padding-left")) - 30;
-      display.style.paddingLeft = `${paddingLeftValue}px`;
+  if (display.textContent.length < 15) {
+    operators.forEach(operator => operator.classList.remove("active"));
+    if (display.textContent === "0") {
+      display.textContent = e.target.textContent;
+    } else if (display.textContent !== "0") {
+        display.textContent += e.target.textContent;
+        paddingLeftValue = parseInt(window.getComputedStyle(display)
+                                          .getPropertyValue("padding-left")) - 30;
+        display.style.paddingLeft = `${paddingLeftValue}px`;
+    }
   }
 }
 
 function displayPoint(e) {
-  display.textContent += e.target.textContent;
-  paddingLeftValue = parseInt(window.getComputedStyle(display)
-                                        .getPropertyValue("padding-left")) - 17;
-  display.style.paddingLeft = `${paddingLeftValue}px`;
+  if (!pointClicked) {
+    display.textContent += e.target.textContent;
+    paddingLeftValue = parseInt(window.getComputedStyle(display)
+                                          .getPropertyValue("padding-left")) - 17;
+    display.style.paddingLeft = `${paddingLeftValue}px`;
+  }
+  pointClicked = true;
+  if (clearDisplay) {
+    display.textContent = "0.";
+    display.style.paddingLeft = "423px";
+  }
+  clearDisplay = false;
 }
 
 function getValue() {
@@ -61,6 +71,7 @@ function getValue() {
 
 function getValueAndOp(e) {
   clearDisplay = true;
+  pointClicked = false;
   operators.forEach(operator => operator.classList.remove("active"));
   e.target.classList.add("active");
   getValue();
@@ -81,6 +92,7 @@ function getValueAndOp(e) {
 
 function displaySolution() {
   clearDisplay = true;
+  pointClicked = false;
   operators.forEach(operator => operator.classList.remove("active"));
   if (firstDisplayValue) {
     getValue();
@@ -100,7 +112,7 @@ function calculate() {
           let text = solution.toString();
           let afterDcml = text.length - text.indexOf(".") - 1;
           let beforeDcml = text.length - afterDcml - 1;
-          solution = solution.toFixed(15 - beforeDcml);
+          solution = parseFloat(solution.toFixed(15 - beforeDcml));
           solutionLength = solution.toString().length;
         } 
         paddingLeftValue = 423 - (solutionLength - 2) * 30;
@@ -125,6 +137,7 @@ function clearData() {
   solution = null;
   operator = null;
   clearDisplay = false;
+  pointClicked = false;
 }
 
 // Declare the main variables
@@ -133,6 +146,7 @@ let firstDisplayValue = null;
 let secondDisplayValue = null;
 let solution = null;
 let operator = null;
+let pointClicked = false;
 let clearDisplay = false;
 
 // Create the display variable
