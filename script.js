@@ -82,31 +82,49 @@ function getValueAndOp(e) {
 function displaySolution() {
   clearDisplay = true;
   operators.forEach(operator => operator.classList.remove("active"));
-  getValue();
-  calculate();
+  if (firstDisplayValue) {
+    getValue();
+    calculate();
+  }
 }
 
 function calculate() {
   solution = operate(operator, firstDisplayValue, secondDisplayValue);
-  let solutionLength = solution.toString().length;
-  if (!Number.isInteger(solution)) {
-    if (solutionLength > 16) {
-      let text = solution.toString();
-      let afterDcml = text.length - text.indexOf(".") - 1;
-      let beforeDcml = text.length - afterDcml - 1;
-      solution = solution.toFixed(15 - beforeDcml);
-      solutionLength = solution.toString().length;
-    } 
-    paddingLeftValue = 423 - (solutionLength - 2) * 30;
+  if (secondDisplayValue === "0" && operator === "/") {
+    solution = "Duh";
+    paddingLeftValue = 365;
   } else {
-      paddingLeftValue = 440 - (solutionLength - 1) * 30;
-      console.log(solution);
-      console.log("integer");
+      let solutionLength = solution.toString().length;
+      if (!Number.isInteger(solution)) {
+        if (solutionLength > 16) {
+          let text = solution.toString();
+          let afterDcml = text.length - text.indexOf(".") - 1;
+          let beforeDcml = text.length - afterDcml - 1;
+          solution = solution.toFixed(15 - beforeDcml);
+          solutionLength = solution.toString().length;
+        } 
+        paddingLeftValue = 423 - (solutionLength - 2) * 30;
+      } else {
+          if (solutionLength > 15) {
+            solution = Number(solution.toString().substring(0, 15));
+            solutionLength = solution.toString().length;
+          }
+          paddingLeftValue = 440 - (solutionLength - 1) * 30;
+        }
   }
   display.textContent = solution;
   firstDisplayValue = null;
   secondDisplayValue = null
   display.style.paddingLeft = `${paddingLeftValue}px`;
+}
+
+function clearData() {
+  display.textContent = "0";
+  display.style.paddingLeft = "440px";
+  paddingLeftValue = null;
+  solution = null;
+  operator = null;
+  clearDisplay = false;
 }
 
 // Declare the main variables
@@ -136,3 +154,7 @@ operators.forEach(operator => operator.addEventListener("click", getValueAndOp))
 // Add an event listener to =
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", displaySolution);
+
+// Add an event listener to the clear button
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", clearData);

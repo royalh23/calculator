@@ -7,9 +7,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 97vh;
+  background-color: blanchedalmond;
 }
 
 .calc {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
