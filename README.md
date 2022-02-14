@@ -1,1 +1,1 @@
-This is a Calculator project. This project is a demonstration of my front-end skills.
+This is a Calculator project. This project is a demonstration of my front-end skills. You can check the project on this website: https://royalh23.github.io/calculator/
